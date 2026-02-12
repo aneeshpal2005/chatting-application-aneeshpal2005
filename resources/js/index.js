@@ -1,4 +1,5 @@
 const { send } = require(`node:process`);
+const { server } = require(`typescript`);
 
 const nameInput = document.getElementById(`my-name-input`);
 const myMessage = document.getElementById(`my-message`);
@@ -34,28 +35,28 @@ function formatMessage(message, myNameInput) {
   }
 }
 
-function fetchMessages() {
-  return [
-    {
-      id: 1,
-      text: `This is my message`,
-      sender: `Yahya Gilany`,
-      timestamp: 1537410673072
-    },
-    {
-      id: 2,
-      text: `This is another message`,
-      sender: `Yahya Gilany`,
-      timestamp: 1537410673072
-    },
-    {
-      id: 3,
-      text: `This is a message from someone else`,
-      sender: `Someone Else`,
-      timestamp: 1537410673072
-    }
-  ];
-}
+// function fetchMessages() {
+//   return [
+//     {
+//       id: 1,
+//       text: `This is my message`,
+//       sender: `Yahya Gilany`,
+//       timestamp: 1537410673072
+//     },
+//     {
+//       id: 2,
+//       text: `This is another message`,
+//       sender: `Yahya Gilany`,
+//       timestamp: 1537410673072
+//     },
+//     {
+//       id: 3,
+//       text: `This is a message from someone else`,
+//       sender: `Someone Else`,
+//       timestamp: 1537410673072
+//     }
+//   ];
+// }
 
 function updateMessages() {
   const messages = fetchMessages();
@@ -80,3 +81,19 @@ sendButton.addEventListener(`click`, (event) => {
   sendMessages(senderName, messageText);
   myMessage.value = ``;
 });
+
+const serverURL = ``;
+
+// async function fetchMessages() {
+//   const response = await fetch(serverURL );
+//   return response.json();
+// }
+
+
+function sendMessages(senderName, messageText) {
+  const message = {
+    text: messageText,
+    sender: senderName,
+    timestamp: Date.now()
+  };
+}
