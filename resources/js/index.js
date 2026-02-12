@@ -1,3 +1,5 @@
+const { send } = require(`node:process`);
+
 const nameInput = document.getElementById(`my-name-input`);
 const myMessage = document.getElementById(`my-message`);
 const sendButton = document.getElementById(`send-button`);
@@ -67,15 +69,14 @@ function updateMessages() {
 
 updateMessages();
 
-sendButton.addEventListener(`click`, () => {
-  const newMessage = {
-    id: Date.now(),
-    text: myMessage.value,
-    sender: nameInput.value,
-    timestamp: Date.now()
-  };
-
-  const formattedMessage = formatMessage(newMessage, nameInput.value);
-  chatBox.innerHTML += formattedMessage;
+sendButton.addEventListener(`click`, (event) => {
+  event.preventDefault();
+  const senderName = nameInput.value.trim();
+  const messageText = myMessage.value.trim();
+  if (senderName === `` || messageText === ``) {
+    alert(`Please enter your name and message.`);
+    return;
+  }
+  sendMessages(senderName, messageText);
   myMessage.value = ``;
 });
